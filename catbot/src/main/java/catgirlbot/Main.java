@@ -17,24 +17,7 @@ public class Main {
 
             // block for meow timer
             if (event.getMessageContent().substring(0, Math.min(event.getMessageContent().length(), 14)).equalsIgnoreCase("Mrrp at me in ")) {
-                try {
-                    int delay = Integer.parseInt(event.getMessageContent().replaceAll(",", "").substring(14));
-                    if (delay>-1) {
-                        new Thread(){
-                            public void run() {
-                                try {
-                                    Meow.meow(event.getChannel(), event.getMessageAuthor(), delay);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }.start();
-                    } else {
-                        event.getChannel().sendMessage("That...... is not a positive number");
-                    }
-                } catch (Exception e) {
-                    event.getChannel().sendMessage("That...... is not a positive number"); // catch the exception when people give non--numbers as timer delay
-                }
+                Meow.meowtimer(event);
             }
             // end of block for meow timer
 
