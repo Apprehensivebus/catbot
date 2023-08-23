@@ -23,10 +23,13 @@ public class Main {
 
             // begin general block for commands starting with catgirl,
             if (event.getMessageContent().substring(0, Math.min(event.getMessageContent().length(), 9)).equalsIgnoreCase("catgirl, ")) {
-                event.getChannel().sendMessage("Command test, received:");
+                if (event.getMessageContent().substring(9).equalsIgnoreCase("treasure hunt")) {
+                    event.getChannel().sendMessage("Treasure hunt test command received");
 
+                }
             }
             // end general block for commands starting with catgirl,
+
         });
     }
 }
