@@ -1,3 +1,4 @@
 /.vscode
 /catbot/target
-
+*.log
+target
