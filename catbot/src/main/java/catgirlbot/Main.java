@@ -24,7 +24,6 @@ public class Main {
             // begin general block for commands starting with catgirl,
             if (event.getMessageContent().substring(0, Math.min(event.getMessageContent().length(), 9)).equalsIgnoreCase("catgirl, ")) {
                 if (event.getMessageContent().substring(9).equalsIgnoreCase("treasure hunt")) {
-                    event.getChannel().sendMessage("Treasure hunt test command received");
                     new Treasurehunt(event, api).start();
                 }
             }

@@ -33,24 +33,28 @@ public class Treasurehunt extends Thread{
 
         event.getChannel().sendMessage("Treasure hunting time!\n Original credit to verysmollgecko!! \n\n(use **north,south,east,west** to move!) NOW FIND IT!! :3\n--------");
         Random generator = new Random(System.currentTimeMillis());
-        int ty = generator.nextInt(10);
-        int tx = generator.nextInt(10);
+        final int ty = generator.nextInt(10);
+        final int tx = generator.nextInt(10);
         py = generator.nextInt(10);
         px = generator.nextInt(10);
         if (ty==py){
-            ty = generator.nextInt(10);
+            py = generator.nextInt(10);
         }
         if (tx==px){
-            tx = generator.nextInt(10);
+            px = generator.nextInt(10);
         }
 
-        Message mess=(Message) event.getChannel().sendMessage("Your starting coordinates are:(" + px + "," + py + ")*\n---\nYou're **'..math.abs(px - tx) + math.abs(py - ty)..'** spaces away :3").join();
-        Boolean play =  true;
+        Message mess=(Message) event.getChannel().sendMessage("Your starting coordinates are:(" + px + "," + py + ")*\n---\nYou're **"+(Math.abs(px - tx) + Math.abs(py - ty))+"** spaces away :3").join();
         api.addMessageCreateListener(msg -> {
             if (msg.getChannel()==mess.getChannel() && movesY.containsKey(msg.getMessageContent())) {
                 px+=movesX.get(msg.getMessageContent());
                 py+=movesY.get(msg.getMessageContent());
-                event.getChannel().sendMessage("" + px + " " + py);
+                mess.edit("You moved 1 space " +msg.getMessageContent()+ " your new coordinates are:(" + px + "," + py + ")*\n---\nYou're **"+(Math.abs(px - tx) + Math.abs(py - ty))+"** spaces away :3");
+                if (py==ty && px==tx){
+                    mess.edit("**You found my treasure!!** :pensive: ");
+                    return;
+                }
+            msg.deleteMessage();
             }
         }); 
     }
