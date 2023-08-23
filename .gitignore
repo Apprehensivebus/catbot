@@ -2,3 +2,4 @@
 /catbot/target
 *.log
 target
+*.class
