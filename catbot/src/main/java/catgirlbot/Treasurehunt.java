@@ -7,9 +7,18 @@ import org.javacord.api.*;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.event.message.MessageCreateEvent;
 
-public class Treasurehunt {
-    
-    public static void treasurehunt(MessageCreateEvent event, DiscordApi api){
+public class Treasurehunt extends Thread{
+    int px;
+    int py;
+    MessageCreateEvent event;
+    DiscordApi api;
+
+    public Treasurehunt(MessageCreateEvent even,DiscordApi ap){
+        event=even;
+        api=ap;
+    };
+
+    public void run(){
         //This hashmap thing should be cleaner idk how tho
         HashMap<String, Integer> movesX= new HashMap<String, Integer>(); 
         movesX.put("north",1); 
@@ -26,8 +35,8 @@ public class Treasurehunt {
         Random generator = new Random(System.currentTimeMillis());
         int ty = generator.nextInt(10);
         int tx = generator.nextInt(10);
-        int py = generator.nextInt(10);
-        int px = generator.nextInt(10);
+        py = generator.nextInt(10);
+        px = generator.nextInt(10);
         if (ty==py){
             ty = generator.nextInt(10);
         }
@@ -35,17 +44,14 @@ public class Treasurehunt {
             tx = generator.nextInt(10);
         }
 
-        Message mess=(Message) event.getChannel().sendMessage("Your starting coordinates are:(" + px + "," + py + ")*\n---\nYou're **'..math.abs(px - tx) + math.abs(py - ty)..'** spaces away :3");
+        Message mess=(Message) event.getChannel().sendMessage("Your starting coordinates are:(" + px + "," + py + ")*\n---\nYou're **'..math.abs(px - tx) + math.abs(py - ty)..'** spaces away :3").join();
         Boolean play =  true;
-
-        while (play) {
-            api.addMessageCreateListener(msg -> {
-                if (msg.getChannel()==mess.getChannel() && movesY.containsKey(msg.getMessageContent())) {
-                    px+=movesX.get(msg.getMessageContent());
-                    py+=movesY.get(msg.getMessageContent());
-                }
-
-            });
-        }
+        api.addMessageCreateListener(msg -> {
+            if (msg.getChannel()==mess.getChannel() && movesY.containsKey(msg.getMessageContent())) {
+                px+=movesX.get(msg.getMessageContent());
+                py+=movesY.get(msg.getMessageContent());
+                event.getChannel().sendMessage("" + px + " " + py);
+            }
+        }); 
     }
 }
