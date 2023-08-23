@@ -1,6 +1,3 @@
 /.vscode
-<<<<<<< HEAD
-/target
-=======
-/target
->>>>>>> 94f06a2af34eace3386c6d02aeb13a179ac0ec9e
+/catbot/target
+
