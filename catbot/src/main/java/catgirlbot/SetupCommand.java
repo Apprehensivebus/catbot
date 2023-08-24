@@ -24,7 +24,7 @@ public class SetupCommand {
                         SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "toggle", "Allows a permission to a user for a channel",
                             Arrays.asList(
                                 SlashCommandOption.create(SlashCommandOptionType.CHANNEL, "channel", "The channel for which to toggle the permission", true),
-                                SlashCommandOption.create(SlashCommandOptionType.STRING, "permission", "The permission to toggle", true
+                                SlashCommandOption.create(SlashCommandOptionType.LONG, "permission", "The permission to toggle", true
         )))))))
         .createGlobal(api)
         .join();
