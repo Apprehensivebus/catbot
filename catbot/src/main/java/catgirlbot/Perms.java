@@ -26,17 +26,19 @@ public class Perms {
                     permSet.set(Integer.parseInt(k));
                 }
                 System.out.println("Putting " + permSet + " into " + Long.parseLong(key));
-                parsedPerms.put(Long.parseLong(key),(BitSet) permSet.clone());
+                parsedPerms.put(Long.parseLong(key), (BitSet) permSet.clone());
             }
         }
         return parsedPerms;
     }
 
     public static JSONObject initPerms() { //creates the permission bitset for each channel, fallback.
-        JSONObject perms = new JSONObject(); // JSONobject with channel id as key and perms 
+
+        JSONObject perms = new JSONObject(); // JSONObject with channel id as key and perms 
+
         //homeperms.set(0);// enable first perm by default for now
         homeperms.set(0);// enable second perm by default for now
-        perms.put(String.valueOf(homechannel),homeperms); // woo bitset
+        perms.put(String.valueOf(homechannel), homeperms); // woo bitset
         return perms;
     }
 

@@ -59,11 +59,6 @@ public class Main {
                         new Treasurehunt(event, api).start();
                     }
                 }
-
-                if (event.getMessageContent().equalsIgnoreCase("catgirl, save settings")) {
-                    Perms.savePerms(perms);
-                }
-
                 //if (event.getMessageContent().equalsIgnoreCase("catgirl, set up commands")) {
                 //    SetupCommand.setupCommand();
                 //}
