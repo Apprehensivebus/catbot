@@ -30,7 +30,7 @@ public class Main {
         api.addSlashCommandCreateListener(event -> {
             SlashCommandInteraction slashCommandInteraction = event.getSlashCommandInteraction();
             if (slashCommandInteraction.getFullCommandName().equals("catgirlbot2 permissions toggle")) {
-                if (slashCommandInteraction.getUser().isBotOwner()){
+                if (slashCommandInteraction.getUser().isBotOwner()) {
                     ServerChannel channel = slashCommandInteraction.getArgumentChannelValueByName("channel").get();
                     String permission = slashCommandInteraction.getArgumentStringValueByName("permission").get();
                     slashCommandInteraction.createImmediateResponder().setContent("You tried to toggle permission " + permission + " in channel " + channel.getName()).setFlags(MessageFlag.EPHEMERAL).respond().join();
@@ -45,15 +45,15 @@ public class Main {
         });
 
         api.addMessageCreateListener(event -> {
-            if (parsedPerms.containsKey(event.getChannel().getId())){
+            if (parsedPerms.containsKey(event.getChannel().getId())) {
 
                 // block for meow timer
                 if (parsedPerms.get(event.getChannel().getId()).get(0)&&event.getMessageContent().substring(0, Math.min(event.getMessageContent().length(), 14)).equalsIgnoreCase("Meow at me in ")) {
                     Meow.meowtimer(event);
                 }
-            // end of block for meow timer
+                // end of block for meow timer
 
-            // begin general block for commands starting with catgirl, 
+                // begin general block for commands starting with catgirl, 
                 if (event.getMessageContent().substring(0, Math.min(event.getMessageContent().length(), 9)).equalsIgnoreCase("catgirl, ")) {
                     if (parsedPerms.get(event.getChannel().getId()).get(1)&&event.getMessageContent().substring(9).equalsIgnoreCase("treasure hunt")) {
                         new Treasurehunt(event, api).start();

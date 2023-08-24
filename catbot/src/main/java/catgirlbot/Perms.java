@@ -15,14 +15,14 @@ public class Perms {
     static BitSet homeperms = new BitSet(2);
     static BitSet permSet = new BitSet();
 
-    public static HashMap<Long, BitSet> parsePerms(JSONObject perms){
+    public static HashMap<Long, BitSet> parsePerms(JSONObject perms) {
         HashMap<Long, BitSet> parsedPerms =  new HashMap<Long, BitSet>();
 
-        for (String key : perms.keySet()){
+        for (String key : perms.keySet()) {
             permSet.clear();
-            String[] p = perms.getString(key).replaceAll("\\{", "").replaceAll("\\}", "").replaceAll("\\s", "").split(",");
-            if(perms.getString(key).length()>2){
-                for (String k : p){
+            String[] p = perms.getString(key).replaceAll("\\ {", "").replaceAll("\\}", "").replaceAll("\\s", "").split(",");
+            if(perms.getString(key).length()>2) {
+                for (String k : p) {
                     permSet.set(Integer.parseInt(k));
                 }
                 System.out.println("Putting " + permSet + " into " + Long.parseLong(key));
@@ -33,7 +33,9 @@ public class Perms {
     }
 
     public static JSONObject initPerms() { //creates the permission bitset for each channel, fallback.
-        JSONObject perms= new JSONObject(); // JSONobject with channel id as key and perms 
+
+        JSONObject perms = new JSONObject(); // JSONObject with channel id as key and perms 
+
         //homeperms.set(0);// enable first perm by default for now
         homeperms.set(0);// enable second perm by default for now
         perms.put(String.valueOf(homechannel), homeperms); // woo bitset
@@ -53,7 +55,7 @@ public class Perms {
             e.printStackTrace();
             System.out.println("Unsuccessfully loaded settings");
             Perms.savePerms(perms);
-            perms=Perms.loadPerms();
+            perms = Perms.loadPerms();
             return perms;
         }
     }
