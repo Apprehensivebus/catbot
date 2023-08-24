@@ -12,7 +12,10 @@ import org.json.JSONObject;
 
 public class Perms {
     static Long homechannel = 1142829953562464267L; // temp solution until I add commands to add channels and file storage for persistence
-    static BitSet homeperms = new BitSet(2);
+
+    static final int bit_size = 2;
+
+    static BitSet homeperms = new BitSet(bit_size);
     static BitSet permSet = new BitSet();
 
     public static HashMap<Long, BitSet> parsePerms(JSONObject perms) {
@@ -21,7 +24,11 @@ public class Perms {
         for (String key : perms.keySet()) {
             permSet.clear();
             int value = perms.getInt(key);
-            permSet.set(value);
+            for (int i = 0, k = 1; i <= 2; i++, k <<= 1) 
+                if ((value & k) != 0) 
+                    permSet.set(i);
+                
+
             parsedPerms.put(Long.parseLong(key), (BitSet) permSet.clone());
         }
         return parsedPerms;
