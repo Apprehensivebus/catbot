@@ -40,8 +40,8 @@ public class Perms {
         JSONObject perms = new JSONObject(); // JSONObject with channel id as key and perms 
 
         //homeperms.set(0);// enable first perm by default for now
-        homeperms.set(0);// enable second perm by default for now
-        perms.put(String.valueOf(homechannel), homeperms); // woo bitset
+        // enable second perm by default for now
+        perms.put(String.valueOf(homechannel), 2); // woo bitset
         return perms;
     }
 
