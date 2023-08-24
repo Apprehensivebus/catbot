@@ -48,14 +48,14 @@ public class Main {
             if (parsedPerms.containsKey(event.getChannel().getId())) {
 
                 // block for meow timer
-                if (parsedPerms.get(event.getChannel().getId()).get(0)&&event.getMessageContent().substring(0, Math.min(event.getMessageContent().length(), 14)).equalsIgnoreCase("Meow at me in ")) {
+                if (parsedPerms.get(event.getChannel().getId()).get(0) && event.getMessageContent().substring(0, Math.min(event.getMessageContent().length(), 14)).equalsIgnoreCase("Meow at me in ")) {
                     Meow.meowtimer(event);
                 }
                 // end of block for meow timer
 
                 // begin general block for commands starting with catgirl, 
                 if (event.getMessageContent().substring(0, Math.min(event.getMessageContent().length(), 9)).equalsIgnoreCase("catgirl, ")) {
-                    if (parsedPerms.get(event.getChannel().getId()).get(1)&&event.getMessageContent().substring(9).equalsIgnoreCase("treasure hunt")) {
+                    if (parsedPerms.get(event.getChannel().getId()).get(1) && event.getMessageContent().substring(9).equalsIgnoreCase("treasure hunt")) {
                         new Treasurehunt(event, api).start();
                     }
                 }
