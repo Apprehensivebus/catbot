@@ -12,11 +12,7 @@ import org.json.JSONObject;
 
 public class Perms {
     static Long homechannel = 1142829953562464267L; // temp solution until I add commands to add channels and file storage for persistence
-    static Long homechannel2 = 1142496848125370448L;
-    static Long homechannel3 = 1142829787409305680L;
     static BitSet homeperms= new BitSet(2);
-    static BitSet homeperms2= new BitSet(2);
-    static BitSet homeperms3= new BitSet(2);
     static BitSet permSet = new BitSet();
 
     public static HashMap<Long, BitSet> parsePerms(JSONObject perms){
@@ -39,15 +35,6 @@ public class Perms {
         //homeperms.set(0);// enable first perm by default for now
         homeperms.set(0);// enable second perm by default for now
         perms.put(String.valueOf(homechannel),homeperms); // woo bitset
-
-        homeperms2.set(1);// enable second perm by default for now
-        perms.put(String.valueOf(homechannel2),homeperms2); // woo bitset
-
-        homeperms3.set(0);//
-        homeperms3.set(1);// enable second perm by default for now
-        perms.put(String.valueOf(homechannel3),homeperms3); // woo bitset
-
-
         return perms;
     }
 
@@ -64,6 +51,7 @@ public class Perms {
             e.printStackTrace();
             System.out.println("Unsuccessfully loaded settings");
             Perms.savePerms(perms);
+            Perms.loadPerms();
             return perms;
         }
     }
