@@ -32,7 +32,7 @@ public class Main {
             if (slashCommandInteraction.getFullCommandName().equals("catgirlbot2 permissions toggle")) {
                 if (slashCommandInteraction.getUser().isBotOwner()) {
                     ServerChannel channel = slashCommandInteraction.getArgumentChannelValueByName("channel").get();
-                    String permission = slashCommandInteraction.getArgumentStringValueByName("permission").get();
+                    int permission = slashCommandInteraction.getArgumentLongValueByName("permission").get().intValue();
                     slashCommandInteraction.createImmediateResponder().setContent("You tried to toggle permission " + permission + " in channel " + channel.getName()).setFlags(MessageFlag.EPHEMERAL).respond().join();
                     perms.put(String.valueOf(channel.getId()), permission);
                     Perms.savePerms(perms);

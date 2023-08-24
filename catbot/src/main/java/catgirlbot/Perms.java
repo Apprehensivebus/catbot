@@ -20,14 +20,9 @@ public class Perms {
 
         for (String key : perms.keySet()) {
             permSet.clear();
-            String[] p = perms.getString(key).replaceAll("\\ {", "").replaceAll("\\}", "").replaceAll("\\s", "").split(",");
-            if(perms.getString(key).length()>2) {
-                for (String k : p) {
-                    permSet.set(Integer.parseInt(k));
-                }
-                System.out.println("Putting " + permSet + " into " + Long.parseLong(key));
-                parsedPerms.put(Long.parseLong(key), (BitSet) permSet.clone());
-            }
+            int value = perms.getInt(key);
+            permSet.set(value);
+            parsedPerms.put(Long.parseLong(key), (BitSet) permSet.clone());
         }
         return parsedPerms;
     }
