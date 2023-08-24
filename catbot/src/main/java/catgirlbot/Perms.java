@@ -27,7 +27,7 @@ public class Perms {
             int value = perms.getInt(key);
             for (int i = 0, k = 1; i <= 2; i++, k <<= 1) 
                 if ((value & k) != 0) 
-                    permSet.set(i);
+                    permSet.set(i); // whoa mia made this fancy and stuff
                 
 
             parsedPerms.put(Long.parseLong(key), (BitSet) permSet.clone());

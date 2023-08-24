@@ -29,7 +29,7 @@ public class Main {
 
         api.addSlashCommandCreateListener(event -> {
             SlashCommandInteraction slashCommandInteraction = event.getSlashCommandInteraction();
-            if (slashCommandInteraction.getFullCommandName().equals("catgirlbot2 permissions toggle")) {
+            if (slashCommandInteraction.getFullCommandName().equals("catgirlbot permissions toggle")) {
                 if (slashCommandInteraction.getUser().isBotOwner()) {
                     ServerChannel channel = slashCommandInteraction.getArgumentChannelValueByName("channel").get();
                     int permission = slashCommandInteraction.getArgumentLongValueByName("permission").get().intValue();

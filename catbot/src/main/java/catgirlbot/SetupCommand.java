@@ -17,7 +17,7 @@ public class SetupCommand {
         DiscordApi api = new DiscordApiBuilder().setToken(token).addIntents(Intent.MESSAGE_CONTENT).login().join();
 
 
-        SlashCommand.with("catgirlbot2", "Command used to control catgirlbot",
+        SlashCommand.with("catgirlbot", "Command used to control catgirlbot",
             Arrays.asList(
                 SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP, "permissions", "Manage catgirlbot's permissions",
                     Arrays.asList(
