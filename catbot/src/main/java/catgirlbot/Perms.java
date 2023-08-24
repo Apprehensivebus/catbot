@@ -51,7 +51,7 @@ public class Perms {
             e.printStackTrace();
             System.out.println("Unsuccessfully loaded settings");
             Perms.savePerms(perms);
-            Perms.loadPerms();
+            perms=Perms.loadPerms();
             return perms;
         }
     }
