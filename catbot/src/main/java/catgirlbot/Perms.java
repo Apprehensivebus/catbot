@@ -21,11 +21,13 @@ public class Perms {
         for (String key : perms.keySet()){
             permSet.clear();
             String[] p = perms.getString(key).replaceAll("\\{", "").replaceAll("\\}", "").replaceAll("\\s", "").split(",");
-            for (String k : p){
-                permSet.set(Integer.parseInt(k));
+            if(perms.getString(key).length()>2){
+                for (String k : p){
+                    permSet.set(Integer.parseInt(k));
+                }
+                System.out.println("Putting " + permSet + " into " + Long.parseLong(key));
+                parsedPerms.put(Long.parseLong(key),(BitSet) permSet.clone());
             }
-            System.out.println("Putting " + permSet + " into " + Long.parseLong(key));
-            parsedPerms.put(Long.parseLong(key),(BitSet) permSet.clone());
         }
         return parsedPerms;
     }

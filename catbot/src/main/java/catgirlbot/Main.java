@@ -6,6 +6,7 @@ import java.util.BitSet;
 import java.util.HashMap;
 
 import org.javacord.api.*;
+import org.javacord.api.entity.channel.ServerChannel;
 import org.javacord.api.entity.intent.Intent;
 import org.javacord.api.entity.message.MessageFlag;
 import org.javacord.api.interaction.SlashCommandInteraction;
@@ -16,20 +17,30 @@ import org.json.JSONObject;
 
 public class Main {
     //public static JSONObject perms;
-    
-    
+    static JSONObject perms;
+    static HashMap<Long, BitSet> parsedPerms;
 
     public static void main(String[] args) {
         // Insert your bot's token here
         String token = System.getenv("SECONDDISTOKEN");
         DiscordApi api = new DiscordApiBuilder().setToken(token).addIntents(Intent.MESSAGE_CONTENT).login().join();
-        JSONObject perms = Perms.loadPerms();
-        HashMap<Long, BitSet> parsedPerms = Perms.parsePerms(perms);
+        perms = Perms.loadPerms();
+        parsedPerms = Perms.parsePerms(perms);
 
         api.addSlashCommandCreateListener(event -> {
             SlashCommandInteraction slashCommandInteraction = event.getSlashCommandInteraction();
-            if (slashCommandInteraction.getCommandName().equals("catgirlbot")) {
-                slashCommandInteraction.createImmediateResponder().setContent("I did not set this up yet").setFlags(MessageFlag.EPHEMERAL).respond();
+            if (slashCommandInteraction.getFullCommandName().equals("catgirlbot2 permissions toggle")) {
+                if (slashCommandInteraction.getUser().isBotOwner()){
+                    ServerChannel channel = slashCommandInteraction.getArgumentChannelValueByName("channel").get();
+                    String permission = slashCommandInteraction.getArgumentStringValueByName("permission").get();
+                    slashCommandInteraction.createImmediateResponder().setContent("You tried to toggle permission " + permission + " in channel " + channel.getName()).setFlags(MessageFlag.EPHEMERAL).respond().join();
+                    perms.put(String.valueOf(channel.getId()), permission);
+                    Perms.savePerms(perms);
+                    perms = Perms.loadPerms();
+                    parsedPerms = Perms.parsePerms(perms);
+                    System.out.println("Successfully changed perms!");
+                    //slashCommandInteraction.getChannel().get().sendMessage("Perms changed!");
+                }
             }
         });
 
@@ -52,6 +63,10 @@ public class Main {
                 if (event.getMessageContent().equalsIgnoreCase("catgirl, save settings")) {
                     Perms.savePerms(perms);
                 }
+
+                //if (event.getMessageContent().equalsIgnoreCase("catgirl, set up commands")) {
+                //    SetupCommand.setupCommand();
+                //}
 
             // end general block for commands starting with catgirl,
             }
