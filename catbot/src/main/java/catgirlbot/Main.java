@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 import org.javacord.api.*;
 import org.javacord.api.entity.intent.Intent;
+import org.javacord.api.entity.message.MessageFlag;
+import org.javacord.api.interaction.SlashCommandInteraction;
 import org.json.JSONObject;
 
 
@@ -23,6 +25,13 @@ public class Main {
         DiscordApi api = new DiscordApiBuilder().setToken(token).addIntents(Intent.MESSAGE_CONTENT).login().join();
         JSONObject perms = Perms.loadPerms();
         HashMap<Long, BitSet> parsedPerms = Perms.parsePerms(perms);
+
+        api.addSlashCommandCreateListener(event -> {
+            SlashCommandInteraction slashCommandInteraction = event.getSlashCommandInteraction();
+            if (slashCommandInteraction.getCommandName().equals("catgirlbot")) {
+                slashCommandInteraction.createImmediateResponder().setContent("I did not set this up yet").setFlags(MessageFlag.EPHEMERAL).respond();
+            }
+        });
 
         api.addMessageCreateListener(event -> {
             if (parsedPerms.containsKey(event.getChannel().getId())){
@@ -43,6 +52,7 @@ public class Main {
                 if (event.getMessageContent().equalsIgnoreCase("catgirl, save settings")) {
                     Perms.savePerms(perms);
                 }
+
             // end general block for commands starting with catgirl,
             }
         });
