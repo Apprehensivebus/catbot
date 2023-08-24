@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 
 public class Main {
-    public static JSONObject perms;
+    //public static JSONObject perms;
     
     
 
@@ -21,8 +21,7 @@ public class Main {
         // Insert your bot's token here
         String token = System.getenv("SECONDDISTOKEN");
         DiscordApi api = new DiscordApiBuilder().setToken(token).addIntents(Intent.MESSAGE_CONTENT).login().join();
-        JSONObject perms = Perms.initPerms();
-        System.out.println(perms.isEmpty());
+        JSONObject perms = Perms.loadPerms();
         HashMap<Long, BitSet> parsedPerms = Perms.parsePerms(perms);
 
         api.addMessageCreateListener(event -> {
