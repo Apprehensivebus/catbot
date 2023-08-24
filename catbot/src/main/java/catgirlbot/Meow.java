@@ -6,12 +6,12 @@ import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.event.message.MessageCreateEvent;
 
-public class Meow{
-        public static void meowtimer (MessageCreateEvent event){
+public class Meow {
+        public static void meowtimer (MessageCreateEvent event) {
             try {
                 int delay = Integer.parseInt(event.getMessageContent().replaceAll(",", "").substring(14));
                 if (delay>-1) {
-                    new Thread(){
+                    new Thread() {
                         public void run() {
                             try {
                                 Meow.meow(event.getChannel(), event.getMessageAuthor(), delay);
