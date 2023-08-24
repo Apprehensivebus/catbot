@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
+import org.json.JSONWriter;
 
 public class Perms {
     static Long homechannel = 1142829953562464267L; // temp solution until I add commands to add channels and file storage for persistence
@@ -65,7 +66,16 @@ public class Perms {
     public static void savePerms(JSONObject perms) {
         try {
             FileWriter myWriter = new FileWriter("perms.json");
-            perms.write(myWriter);
+            JSONWriter writer = new JSONWriter(myWriter);
+            writer
+                .object();
+            for (String key : perms.keySet()) {
+                writer
+                    .key(key)
+                    .value(perms.getInt(key));
+            }
+            writer
+                .endObject();
             myWriter.close();
             System.out.println("Successfully saved settings");
         } catch (IOException e) {
