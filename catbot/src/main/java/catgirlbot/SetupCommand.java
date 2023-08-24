@@ -32,4 +32,13 @@ public class SetupCommand {
     
     }
     
+
+    public static void deleteAllCommands() {
+        String token = System.getenv("SECONDDISTOKEN");
+        DiscordApi api = new DiscordApiBuilder().setToken(token).addIntents(Intent.MESSAGE_CONTENT).login().join();
+        api.getGlobalSlashCommands().join().forEach(command -> command.delete().join());
+        api.getServers().forEach((server) -> {
+            api.getServerSlashCommands(server).join().forEach(command -> command.delete().join());
+        });
+    }
 }
