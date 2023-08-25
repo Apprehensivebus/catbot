@@ -67,7 +67,7 @@ public class Main {
                 if (parsedPerms.get(event.getChannel().getId()).get(2)){ 
                     Cutesy.main(event);
                 }
-
+                
                 // begin anarchy chess
                 if (parsedPerms.get(event.getChannel().getId()).get(3)){ 
                     AnCh.main(event);

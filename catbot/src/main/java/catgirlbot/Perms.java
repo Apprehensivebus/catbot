@@ -25,11 +25,10 @@ public class Perms {
         for (String key : perms.keySet()) {
             permSet.clear();
             int value = perms.getInt(key);
-            for (int i = 0, k = 1; i <= 2; i++, k <<= 1) 
+            for (int i = 0, k = 1; i < bit_size; i++, k <<= 1) {
                 if ((value & k) != 0) 
                     permSet.set(i); // whoa mia made this fancy and stuff
-                
-
+            }
             parsedPerms.put(Long.parseLong(key), (BitSet) permSet.clone());
         }
         return parsedPerms;
