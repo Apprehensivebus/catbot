@@ -14,19 +14,19 @@ public class Cutesy {
             event.getMessage().getChannel().sendMessage("Do crime :sunglasses:");
         }
 
-        else if (event.getMessageContent().toLowerCase().contains("can")&&event.getMessageContent().toLowerCase().contains("have headpats")) {
+        else if (event.getMessageContent().toLowerCase().contains("can") && event.getMessageContent().toLowerCase().contains("have headpats")) {
             event.getMessage().getChannel().sendMessage("Of course! *pat* *pat* *pat* :smile:");
         }
 
-        else if (event.getMessageContent().toLowerCase().contains("can")&&event.getMessageContent().toLowerCase().contains("have hug")) {
+        else if (event.getMessageContent().toLowerCase().contains("can") && event.getMessageContent().toLowerCase().contains("have hug")) {
             event.getMessage().getChannel().sendMessage("Of course! :people_hugging:");
         }
 
-        else if (event.getMessageContent().toLowerCase().contains("hey")&&event.getMessageContent().toLowerCase().contains("have hug")) {
+        else if (event.getMessageContent().toLowerCase().contains("hey") && event.getMessageContent().toLowerCase().contains("have hug")) {
             event.getMessage().getChannel().sendMessage("Of course! :people_hugging:");
         }
 
-        
+
 
 
 
