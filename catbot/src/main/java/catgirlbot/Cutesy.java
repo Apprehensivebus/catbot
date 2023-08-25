@@ -23,7 +23,7 @@ public class Cutesy {
         }
 
         else if (event.getMessageContent().toLowerCase().contains("m not cute")) {
-            event.getMessage().reply("Of course! :people_hugging:");
+            event.getMessage().reply(":warning: ``Independent fact checkers have verified that this claim to uncuteness is false`` :warning:");
         }
 
         else if (event.getMessageContent().toLowerCase().contains("catgirl") && (event.getMessageContent().toLowerCase().contains("github") || event.getMessageContent().toLowerCase().contains("source"))) {

@@ -22,7 +22,7 @@ public class Main {
 
     public static void main(String[] args) {
         // Insert your bot's token here
-        String token = System.getenv("DISBOTTOKEN");
+        String token = System.getenv("SECONDDISTOKEN");
         DiscordApi api = new DiscordApiBuilder().setToken(token).addIntents(Intent.MESSAGE_CONTENT).login().join();
         perms = Perms.loadPerms();
         parsedPerms = Perms.parsePerms(perms);
@@ -66,13 +66,11 @@ public class Main {
                 // begin random cutesy stuff blocck
                 if (parsedPerms.get(event.getChannel().getId()).get(2)){ 
                     Cutesy.main(event);
-                    return;
                 }
 
                 // begin anarchy chess
                 if (parsedPerms.get(event.getChannel().getId()).get(3)){ 
                     AnCh.main(event);
-                    return;
                 }
 
 
