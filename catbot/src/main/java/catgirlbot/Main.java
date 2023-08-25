@@ -45,25 +45,33 @@ public class Main {
         });
 
         api.addMessageCreateListener(event -> {
-            if (parsedPerms.containsKey(event.getChannel().getId())) {
+            if (event.getMessageAuthor().isRegularUser() && parsedPerms.containsKey(event.getChannel().getId())) {
 
                 // block for meow timer
                 if (parsedPerms.get(event.getChannel().getId()).get(0) && event.getMessageContent().substring(0, Math.min(event.getMessageContent().length(), 14)).equalsIgnoreCase("Meow at me in ")) {
                     Meow.meowtimer(event);
+                    return;
                 }
                 // end of block for meow timer
-
+                
                 // begin general block for commands starting with catgirl, 
                 if (event.getMessageContent().substring(0, Math.min(event.getMessageContent().length(), 9)).equalsIgnoreCase("catgirl, ")) {
                     if (parsedPerms.get(event.getChannel().getId()).get(1) && event.getMessageContent().substring(9).equalsIgnoreCase("treasure hunt")) {
                         new Treasurehunt(event, api).start();
+                        return;
                     }
                 }
-                //if (event.getMessageContent().equalsIgnoreCase("catgirl, set up commands")) {
-                //    SetupCommand.setupCommand();
-                //}
+                // end general block for commands starting with catgirl,
 
-            // end general block for commands starting with catgirl,
+                // begin random cutesy stuff blocck
+                if (parsedPerms.get(event.getChannel().getId()).get(2)){ 
+                    Cutesy.main(event);
+                    return;
+                }
+
+                
+
+            
             }
         });
     }
