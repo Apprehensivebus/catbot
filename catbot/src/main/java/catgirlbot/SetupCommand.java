@@ -13,7 +13,7 @@ public class SetupCommand {
 
     public static void setupCommand() {
 
-        String token = System.getenv("SECONDDISTOKEN");
+        String token = System.getenv("DISBOTTOKEN");
         DiscordApi api = new DiscordApiBuilder().setToken(token).addIntents(Intent.MESSAGE_CONTENT).login().join();
 
 
