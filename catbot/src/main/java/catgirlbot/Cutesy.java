@@ -22,8 +22,16 @@ public class Cutesy {
             event.getMessage().getChannel().sendMessage("Of course! :people_hugging:");
         }
 
-        else if (event.getMessageContent().toLowerCase().contains("hey") && event.getMessageContent().toLowerCase().contains("have hug")) {
-            event.getMessage().getChannel().sendMessage("Of course! :people_hugging:");
+        else if (event.getMessageContent().toLowerCase().contains("m not cute")) {
+            event.getMessage().reply("Of course! :people_hugging:");
+        }
+
+        else if (event.getMessageContent().toLowerCase().contains("catgirl") && (event.getMessageContent().toLowerCase().contains("github") || event.getMessageContent().toLowerCase().contains("source"))) {
+            event.getMessage().reply("Of course! https://github.com/Apprehensivebus/javacat/");
+        }
+
+        else if (event.getMessageContent().toLowerCase().contains("launch codes")) {
+            event.getMessage().reply("``This message was redacted for national security reasons``");
         }
 
 

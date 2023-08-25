@@ -69,7 +69,13 @@ public class Main {
                     return;
                 }
 
-                
+                // begin anarchy chess
+                if (parsedPerms.get(event.getChannel().getId()).get(3)){ 
+                    AnCh.main(event);
+                    return;
+                }
+
+
 
             
             }

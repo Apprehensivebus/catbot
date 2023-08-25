@@ -3,6 +3,7 @@ package catgirlbot;
 import java.time.Instant;
 
 import org.javacord.api.entity.channel.TextChannel;
+import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.event.message.MessageCreateEvent;
 
@@ -14,7 +15,7 @@ public class Meow {
                     new Thread() {
                         public void run() {
                             try {
-                                Meow.meow(event.getChannel(), event.getMessageAuthor(), delay);
+                                Meow.meow(event.getChannel(), event.getMessageAuthor(), delay, event.getMessage());
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -28,9 +29,9 @@ public class Meow {
             }
         }
 
-        public static void meow(TextChannel channel, MessageAuthor author, int delay)throws InterruptedException {
+        public static void meow(TextChannel channel, MessageAuthor author, int delay, Message message)throws InterruptedException {
             channel.sendMessage("Okey, I\'ll meow at you <t:" + (Instant.now().getEpochSecond()+delay) +":R>");
             Thread.sleep(delay*1000);
-            author.asUser().ifPresent(user -> channel.sendMessage("Meow~, " + user.getMentionTag() + ", it has been " + delay + " seconds "));
+            message.reply("Meow~, it has been " + delay + " seconds ");
         }  
 }
