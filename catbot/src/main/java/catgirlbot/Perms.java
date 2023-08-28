@@ -14,7 +14,7 @@ import org.json.JSONWriter;
 public class Perms {
     static Long homechannel = 1142829953562464267L; // temp solution until I add commands to add channels and file storage for persistence
 
-    static final int bit_size = 4;
+    static final int bit_size = 5;
 
     static BitSet homeperms = new BitSet(bit_size);
     static BitSet permSet = new BitSet();
@@ -25,7 +25,7 @@ public class Perms {
         for (String key : perms.keySet()) {
             permSet.clear();
             int value = perms.getInt(key);
-            for (int i = 0, k = 1; i < bit_size; i++, k <<= 1) {
+            for (int i = 0, k = 1; i < bit_size; i++, k <<= 1) { // Yippee something with bit magic
                 if ((value & k) != 0) 
                     permSet.set(i); // whoa mia made this fancy and stuff
             }
@@ -38,13 +38,11 @@ public class Perms {
 
         JSONObject perms = new JSONObject(); // JSONObject with channel id as key and perms 
 
-        //homeperms.set(0);// enable first perm by default for now
-        // enable second perm by default for now
         perms.put(String.valueOf(homechannel), 2); // woo bitset
         return perms;
     }
 
-    public static JSONObject loadPerms() { //creates the permission bitset for each channel
+    public static JSONObject loadPerms() { // ngl this is all either copied from somewhere or made by Mia idfk how json works
         InputStream is;
         try {
             is = new FileInputStream("perms.json");
@@ -62,7 +60,7 @@ public class Perms {
         }
     }
     
-    public static void savePerms(JSONObject perms) {
+    public static void savePerms(JSONObject perms) { // ngl this is all either copied from somewhere or made by Mia idfk how json works
         try {
             FileWriter myWriter = new FileWriter("perms.json");
             JSONWriter writer = new JSONWriter(myWriter);

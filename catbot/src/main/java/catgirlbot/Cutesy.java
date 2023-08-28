@@ -2,6 +2,7 @@ package catgirlbot;
 
 import org.javacord.api.event.message.MessageCreateEvent;
 
+// this file is an if tree, if you require comments please find help
 
 public class Cutesy {
     public static void main (MessageCreateEvent event) {
@@ -22,7 +23,7 @@ public class Cutesy {
             event.getMessage().getChannel().sendMessage("Of course! :people_hugging:");
         }
 
-        else if (event.getMessageContent().toLowerCase().contains("m not cute")) {
+        else if (event.getMessageContent().toLowerCase().contains("m not cute") || event.getMessageContent().toLowerCase().contains("m uncute")) {
             event.getMessage().reply(":warning: ``Independent fact checkers have verified that this claim to uncuteness is false`` :warning:");
         }
 
