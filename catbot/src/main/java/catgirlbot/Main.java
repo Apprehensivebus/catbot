@@ -64,17 +64,17 @@ public class Main {
 
                 // begin random cutesy stuff blocck, perm value 4
                 if (parsedPerms.get(event.getChannel().getId()).get(2)){ 
-                    Cutesy.main(event);
+                    Cutesy.doCute(event);
                 }
                 
                 // begin anarchy chess, perm value 8
                 if (parsedPerms.get(event.getChannel().getId()).get(3)){ 
-                    AnCh.main(event);
+                    AnCh.doAC(event);
                 }
 
                 //  begin quote magic, perm value 16
                 if (parsedPerms.get(event.getChannel().getId()).get(4)){ 
-                    Quotes.main(event, api);
+                    Quotes.doQuote(event, api);
                 }
 
 

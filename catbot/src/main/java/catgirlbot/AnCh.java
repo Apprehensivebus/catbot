@@ -5,7 +5,7 @@ import org.javacord.api.event.message.MessageCreateEvent;
 // this file is an if tree, if you require comments please find help
 
 public class AnCh {
-    public static void main (MessageCreateEvent event) {
+    public static void doAC (MessageCreateEvent event) {
 
         if (event.getMessageContent().substring(0,6).equalsIgnoreCase("google")) {
             event.getMessage().getChannel().sendMessage("Holy hell :cat_wtf:");

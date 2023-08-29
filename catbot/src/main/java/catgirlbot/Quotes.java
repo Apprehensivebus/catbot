@@ -12,7 +12,7 @@ import org.javacord.api.event.message.MessageCreateEvent;
 
 
 public class Quotes {
-    public static void main (MessageCreateEvent event, DiscordApi api) { // the command if tree conveniently hidden away from main.java
+    public static void doQuote (MessageCreateEvent event, DiscordApi api) { // the command if tree conveniently hidden away from main.java
         if (event.getMessageContent().toLowerCase().contains("catgirl, add quote")) {
             addQuote(event, api);
         } 

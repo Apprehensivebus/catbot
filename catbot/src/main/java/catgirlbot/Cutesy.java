@@ -5,7 +5,7 @@ import org.javacord.api.event.message.MessageCreateEvent;
 // this file is an if tree, if you require comments please find help
 
 public class Cutesy {
-    public static void main (MessageCreateEvent event) {
+    public static void doCute (MessageCreateEvent event) {
 
         if (event.getMessageContent().equalsIgnoreCase("mrrp")) {
             event.getMessage().getChannel().sendMessage("nyaa~");
