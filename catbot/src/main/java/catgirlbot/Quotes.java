@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
@@ -22,11 +24,11 @@ public class Quotes {
         } 
         
         else if (event.getMessageContent().toLowerCase().contains("catgirl, random quote")) {
-            event.getChannel().sendMessage("I did not add this feature yet, pick a number yourself I guess");
+            randomQuote(event, api);
         } 
 
-        else if (event.getMessageContent().toLowerCase().contains("catgirl, delete quote")) {
-            event.getChannel().sendMessage("I did not add this feature yet, just delete the message");
+        else if (event.getMessageContent().toLowerCase().contains("catgirl, delete quote") && event.getMessage().getAuthor().isBotOwner()) {
+            deleteQuote(event, api);
         }
     }
 
@@ -59,6 +61,43 @@ public class Quotes {
         catch (Exception e) {
             e.printStackTrace(); // coordinated yelling
             event.getChannel().sendMessage("Sorry, I could not grab that"); // if something fucks up just say oops
+        }
+    }
+
+    public static void randomQuote (MessageCreateEvent event, DiscordApi api) {
+        try {
+            Path path = Paths.get("quotes/" + event.getServer().get().getId() + ".txt"); // get the file location for this thing
+            List<String> ids = Files.readAllLines(path); // just read the entire file
+            Integer quoteNumb =(int) Math.round(Math.random()*(ids.size()-1)); // select random quote number between 0 and max index of ids
+            String id=ids.get(quoteNumb);
+            Message quote = (Message) api.getMessageById(id.split("/")[1], (TextChannel) api.getChannelById(id.split("/")[0]).get()).join();// perform black magic to grab the message from its id
+            event.getChannel().sendMessage("\"" + quote.getContent() + "\" --" + quote.getAuthor().getDisplayName()); // send that quote!
+        } 
+        
+        catch (Exception e) {
+            e.printStackTrace(); // coordinated yelling
+            event.getChannel().sendMessage("Sorry, something went wrong"); // if something fucks up just say oops
+        }
+
+    }
+
+    public static void deleteQuote (MessageCreateEvent event, DiscordApi api) {
+        try {
+            Path path = Paths.get("quotes/" + event.getServer().get().getId() + ".txt"); // get the file location for this thing
+            Integer quoteNumb = Integer.parseInt(event.getMessageContent().split(":")[1]); // grab the quote number after the :
+            List<String> ids = Files.readAllLines(path);// just read the entire file and grab line of choice
+            ids.remove(ids.get(quoteNumb)); // remove the marked for death quote
+            FileOutputStream fos = new FileOutputStream(("quotes/" + event.getServer().get().getId() + ".txt"), false); // get file named after the server
+            for (int k = 0 ; k<ids.size() ; k++ ){ // rewrite the entire file without dead quote
+                fos.write((ids.get(k) + "\r\n").getBytes()); //write channel & message ids
+            }   
+            fos.close();
+            event.getChannel().sendMessage("Okay, deleted quote " + quoteNumb);
+        } 
+        
+        catch (Exception e) {
+            e.printStackTrace(); // coordinated yelling
+            event.getChannel().sendMessage("Sorry, I could not delete that"); // if something fucks up just say oops
         }
     }
 }
