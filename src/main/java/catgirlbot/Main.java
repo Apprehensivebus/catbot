@@ -20,7 +20,6 @@ public class Main {
     static HashMap<Long, BitSet> parsedPerms;
 
     public static void main(String[] args) {
-        // Insert your bot's token here
         String token = System.getenv("SECONDDISTOKEN");
         DiscordApi api = new DiscordApiBuilder().setToken(token).addIntents(Intent.MESSAGE_CONTENT).login().join();
         perms = Perms.loadPerms();
