@@ -101,7 +101,7 @@ public class Quotes {
         }
     }
 
-
+// for noe
     public static void dontQuote (MessageCreateEvent event, DiscordApi api) { // the command if tree conveniently hidden away from main.java
         if (event.getMessageContent().toLowerCase().contains("catgirl, add quote")) {
             event.getChannel().sendMessage("Sorry, but my functionality has been replaced by Mia's QuotationBot, please use the command /quote to get started");
