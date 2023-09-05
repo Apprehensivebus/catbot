@@ -28,7 +28,7 @@ public class Cutesy {
         }
 
         else if (event.getMessageContent().toLowerCase().contains("catgirl") && (event.getMessageContent().toLowerCase().contains("github") || event.getMessageContent().toLowerCase().contains("source"))) {
-            event.getMessage().reply("Of course! https://github.com/Apprehensivebus/javacat/");
+            event.getMessage().reply("Of course! https://github.com/Apprehensivebus/catbot/");
         }
 
         else if (event.getMessageContent().toLowerCase().contains("launch codes")) {
