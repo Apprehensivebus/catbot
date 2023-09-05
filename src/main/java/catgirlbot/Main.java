@@ -72,7 +72,7 @@ public class Main {
 
                 //  begin quote magic, perm value 16
                 if (parsedPerms.get(event.getChannel().getId()).get(4)){ 
-                    Quotes.doQuote(event, api);
+                    Quotes.dontQuote(event, api);
                 }
 
 
