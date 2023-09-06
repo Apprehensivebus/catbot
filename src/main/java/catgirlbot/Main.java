@@ -72,12 +72,17 @@ public class Main {
 
                 //  begin quote magic, perm value 16
                 if (parsedPerms.get(event.getChannel().getId()).get(4)){ 
+                    Quotes.doQuote(event, api);
+                } // if replaced with mias bot value 32
+                else if (parsedPerms.get(event.getChannel().getId()).get(5)) {
                     Quotes.dontQuote(event, api);
                 }
 
+                // perm value 64 for magic 8 ball
+                if (parsedPerms.get(event.getChannel().getId()).get(6)) {
+                    EightBall.doBall(event);
+                }
 
-
-            
             }
         });
     }

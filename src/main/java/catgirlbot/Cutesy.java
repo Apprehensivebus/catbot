@@ -35,7 +35,9 @@ public class Cutesy {
             event.getMessage().reply("``This message was redacted for national security reasons``");
         }
 
-
+        else if (event.getMessageContent().toLowerCase().contains("can") && event.getMessageContent().toLowerCase().contains("catgirl") && event.getMessageContent().toLowerCase().contains("do") && event.getMessageContent().toLowerCase().contains("what")) {
+            event.getMessage().reply("Oh my god I thought you'd never ask! \n I can reply silly things to certain trigger messages \n I can respond with the meme chain from the AnarchyChess subreddit \n I can do alarms or reminders (ask me to meow at you in x amount of time! \n I can play treasure hunt! \n I can do quotes with the following commands: (catgirl, ) grab quote:x, random quote, add quote (messagelink) \n I'm cute");
+        }
 
 
 

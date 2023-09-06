@@ -7,7 +7,7 @@ import org.javacord.api.event.message.MessageCreateEvent;
 public class AnCh {
     public static void doAC (MessageCreateEvent event) {
 
-        if (event.getMessageContent().substring(0,6).equalsIgnoreCase("google")) {
+        if (event.getMessageContent().substring(0 , Math.min(event.getMessageContent().length(), 6)).equalsIgnoreCase("google")) {
             event.getMessage().getChannel().sendMessage("Holy hell :cat_wtf:");
         }
 
