@@ -9,6 +9,7 @@ import org.javacord.api.*;
 import org.javacord.api.entity.channel.ServerChannel;
 import org.javacord.api.entity.intent.Intent;
 import org.javacord.api.entity.message.MessageFlag;
+import org.javacord.api.entity.permission.PermissionType;
 import org.javacord.api.interaction.SlashCommandInteraction;
 import org.json.JSONObject;
 
@@ -29,7 +30,7 @@ public class Main {
         api.addSlashCommandCreateListener(event -> {
             SlashCommandInteraction slashCommandInteraction = event.getSlashCommandInteraction();
             if (slashCommandInteraction.getFullCommandName().equals("catgirlbot permissions toggle")) {
-                if (slashCommandInteraction.getUser().isBotOwner()) {
+                if (slashCommandInteraction.getUser().isBotOwner() || slashCommandInteraction.getServer().get().hasPermission(slashCommandInteraction.getUser(), PermissionType.valueOf("MANAGE_CHANNELS"))) {
                     ServerChannel channel = slashCommandInteraction.getArgumentChannelValueByName("channel").get();
                     int permission = slashCommandInteraction.getArgumentLongValueByName("permission").get().intValue();
                     slashCommandInteraction.createImmediateResponder().setContent("You tried to toggle permission " + permission + " in channel " + channel.getName()).setFlags(MessageFlag.EPHEMERAL).respond().join();
