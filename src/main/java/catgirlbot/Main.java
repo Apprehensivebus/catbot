@@ -24,6 +24,7 @@ public class Main {
         DiscordApi api = new DiscordApiBuilder().setToken(token).addIntents(Intent.MESSAGE_CONTENT).login().join();
         perms = Perms.loadPerms();
         parsedPerms = Perms.parsePerms(perms);
+        Proxy.makeProxy(api);
 
         api.addSlashCommandCreateListener(event -> {
             SlashCommandInteraction slashCommandInteraction = event.getSlashCommandInteraction();

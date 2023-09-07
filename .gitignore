@@ -6,4 +6,3 @@ target
 *.jar
 *.txt
 *.json
-src/main/java/catgirlbot/EightBall.java
