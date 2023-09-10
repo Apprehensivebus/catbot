@@ -16,7 +16,8 @@ public class Cutesy {
         }
 
         else if (event.getMessageContent().toLowerCase().contains("can") && event.getMessageContent().toLowerCase().contains("have headpats")) {
-            event.getMessage().getChannel().sendMessage("Of course! *pat* *pat* *pat* :smile:");
+            //event.getMessage().getChannel().sendMessage("Of course! *pat* *pat* *pat* :smile:");
+            Headpats.doPat(event);
         }
 
         else if (event.getMessageContent().toLowerCase().contains("can") && event.getMessageContent().toLowerCase().contains("have hug")) {

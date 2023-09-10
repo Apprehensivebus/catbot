@@ -85,6 +85,11 @@ public class Main {
                     EightBall.doBall(event);
                 }
 
+                // perm value 128 for someone ping 
+                if (parsedPerms.get(event.getChannel().getId()).get(7)) {
+                    Someone.doSomeone(event);
+                }
+
             }
         });
     }

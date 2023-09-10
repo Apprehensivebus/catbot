@@ -14,7 +14,7 @@ import org.json.JSONWriter;
 public class Perms {
     static Long homechannel = 1142829953562464267L; // temp solution until I add commands to add channels and file storage for persistence
 
-    static final int bit_size = 7;
+    static final int bit_size = 8;
 
     static BitSet homeperms = new BitSet(bit_size);
     static BitSet permSet = new BitSet();
