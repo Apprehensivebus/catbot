@@ -90,6 +90,15 @@ public class Main {
                     Someone.doSomeone(event);
                 }
 
+                if ((event.getMessage().getContent().equalsIgnoreCase("catgirl, explain the permissions command to me")) && (event.getMessageAuthor().isBotOwner() || event.getServer().get().hasPermission(event.getMessageAuthor().asUser().get(), PermissionType.valueOf("MANAGE_CHANNELS")))) {
+                    event.getChannel().sendMessage("Okay okay so this is going to be needlessly complex because Sasha's lazy and should make a better system but: \n"
+                    + "So first you use /catgirlbot permissions toggle, this will ask for the channel where you want to change her permissions, and a value.\n"
+                    + "You get the value by adding up the following numbers for each feature you want enabled, or 0 for none: \n"
+                    + "Meow alarm clock : 1 \n Treasure hunt : 2 \n Random cute triggers : 4 \n Anarchychess triggers : 8 \n Catgirls quotes: 16 \n Catgirl quotes when Mia's bot replaces hers : 32 \n Magic 8-ball : 64 \n The @someone ping : 128 \n"
+                    + "In order to enable everything except quotes the current value is 239"
+                    );
+                }
+
             }
         });
     }

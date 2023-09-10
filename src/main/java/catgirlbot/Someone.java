@@ -13,6 +13,7 @@ public class Someone {
     public static void doSomeone(MessageCreateEvent event){
         if (event.getMessageContent().toLowerCase().contains("catgirl, make me someone")) {
             addSomeone(event);
+            event.getChannel().sendMessage("If you regret your decision type :\"catgirl, make me nobody\"");
         } 
 
         if (event.getMessageContent().toLowerCase().contains("catgirl, make me nobody")) {
