@@ -21,17 +21,27 @@ public class SetupCommand {
             Arrays.asList(
                 SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP, "permissions", "Manage catgirlbot's permissions",
                     Arrays.asList(
-                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "toggle", "Allows a permission to a user for a channel",
+                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "edit", "Allows a permission to a user for a channel",
+                            Arrays.asList(
+                                SlashCommandOption.create(SlashCommandOptionType.CHANNEL, "channel", "The channel for which to toggle the permission", true)                    
+        ))))))
+        .createGlobal(api)
+        .join();
+    
+    
+
+    SlashCommand.with("catgirlbot", "Command used to control catgirlbot",
+            Arrays.asList(
+                SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP, "permissions", "Manage catgirlbot's permissions",
+                    Arrays.asList(
+                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "manual", "Allows a permission to a user for a channel",
                             Arrays.asList(
                                 SlashCommandOption.create(SlashCommandOptionType.CHANNEL, "channel", "The channel for which to toggle the permission", true),
                                 SlashCommandOption.create(SlashCommandOptionType.LONG, "permission", "The permission to toggle", true
         )))))))
         .createGlobal(api)
         .join();
-
-    
     }
-    
 
     public static void deleteAllCommands() {
         String token = System.getenv("SECONDDISTOKEN");

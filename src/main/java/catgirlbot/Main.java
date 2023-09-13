@@ -8,7 +8,11 @@ import java.util.HashMap;
 import org.javacord.api.*;
 import org.javacord.api.entity.channel.ServerChannel;
 import org.javacord.api.entity.intent.Intent;
+import org.javacord.api.entity.message.Message;
+import org.javacord.api.entity.message.MessageBuilder;
 import org.javacord.api.entity.message.MessageFlag;
+import org.javacord.api.entity.message.Messageable;
+import org.javacord.api.entity.message.component.Button;
 import org.javacord.api.entity.permission.PermissionType;
 import org.javacord.api.interaction.SlashCommandInteraction;
 import org.json.JSONObject;
@@ -19,6 +23,7 @@ import org.json.JSONObject;
 public class Main {
     static JSONObject perms;
     static HashMap<Long, BitSet> parsedPerms;
+    static Message message;
 
     public static void main(String[] args) {
         String token = System.getenv("SECONDDISTOKEN");
@@ -26,12 +31,38 @@ public class Main {
         perms = Perms.loadPerms();
         parsedPerms = Perms.parsePerms(perms);
         Proxy.makeProxy(api);
+        SetupCommand.setupCommand();
 
         api.addSlashCommandCreateListener(event -> {
             SlashCommandInteraction slashCommandInteraction = event.getSlashCommandInteraction();
-            if (slashCommandInteraction.getFullCommandName().equals("catgirlbot permissions toggle")) {
+            if (slashCommandInteraction.getFullCommandName().equals("catgirlbot permissions edit")) {
                 if (slashCommandInteraction.getUser().isBotOwner() || slashCommandInteraction.getServer().get().hasPermission(slashCommandInteraction.getUser(), PermissionType.valueOf("MANAGE_CHANNELS"))) {
                     ServerChannel channel = slashCommandInteraction.getArgumentChannelValueByName("channel").get();
+                 
+                    message = new MessageBuilder().append("Press the buttons of the perms you want").addActionRow(
+                        Button.primary("perm1", "Meow alarm"),
+                        Button.primary("perm2", "Treasure hunt"),
+                        Button.primary("perm3", "Cutesy triggers"),
+                        Button.primary("perm4", "Anarchychess triggers"),
+                        Button.primary("perm5", "Catgirl's quotes"),
+                        Button.primary("perm6", "Mia's quotes"),
+                        Button.primary("perm7", "Magic 8-ball"),
+                        Button.primary("perm8", "@someone pinging"),
+                        Button.danger("finish", "Finish editing")
+                    ).send((Messageable) slashCommandInteraction.getChannel().get()).join();
+
+
+                    message.addButtonClickListener((e) -> {
+                        var interaction = e.getButtonInteraction();
+                        if (interaction.getUser().getId() == slashCommandInteraction.getUser().getId()) {
+
+                            if (interaction.getCustomId().equals("perm1")) {
+                                posy++;
+                            }
+                            
+                        }
+                    });
+
                     int permission = slashCommandInteraction.getArgumentLongValueByName("permission").get().intValue();
                     slashCommandInteraction.createImmediateResponder().setContent("You tried to toggle permission " + permission + " in channel " + channel.getName()).setFlags(MessageFlag.EPHEMERAL).respond().join();
                     perms.put(String.valueOf(channel.getId()), permission);
@@ -42,7 +73,25 @@ public class Main {
                 }
             }
         });
+ 
+        api.addSlashCommandCreateListener(event -> {
+                SlashCommandInteraction slashCommandInteraction = event.getSlashCommandInteraction();
+                if (slashCommandInteraction.getFullCommandName().equals("catgirlbot permissions manual")) {
+                    if (slashCommandInteraction.getUser().isBotOwner() || slashCommandInteraction.getServer().get().hasPermission(slashCommandInteraction.getUser(), PermissionType.valueOf("MANAGE_CHANNELS"))) {
+                        ServerChannel channel = slashCommandInteraction.getArgumentChannelValueByName("channel").get();
+                        int permission = slashCommandInteraction.getArgumentLongValueByName("permission").get().intValue();
+                        slashCommandInteraction.createImmediateResponder().setContent("You tried to toggle permission " + permission + " in channel " + channel.getName()).setFlags(MessageFlag.EPHEMERAL).respond().join();
+                        perms.put(String.valueOf(channel.getId()), permission);
+                        Perms.savePerms(perms);
+                        perms = Perms.loadPerms();
+                        parsedPerms = Perms.parsePerms(perms);
+                        System.out.println("Successfully changed perms!");
+                }
+            }
+        });
 
+
+        
         api.addMessageCreateListener(event -> {
             if (event.getMessageAuthor().isRegularUser() && parsedPerms.containsKey(event.getChannel().getId())) {
 
