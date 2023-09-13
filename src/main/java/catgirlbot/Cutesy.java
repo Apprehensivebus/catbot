@@ -6,7 +6,7 @@ import org.javacord.api.event.message.MessageCreateEvent;
 
 public class Cutesy {
     public static void doCute (MessageCreateEvent event) {
-
+        System.out.print(cookString(event.getMessageContent().toLowerCase()));
         if (event.getMessageContent().equalsIgnoreCase("mrrp")) {
             event.getMessage().getChannel().sendMessage("nyaa~");
         }
@@ -23,8 +23,8 @@ public class Cutesy {
         else if (event.getMessageContent().toLowerCase().contains("can") && event.getMessageContent().toLowerCase().contains("have hug")) {
             event.getMessage().getChannel().sendMessage("Of course! :people_hugging:");
         }
-
-        else if (event.getMessageContent().toLowerCase().contains("m not cute") || event.getMessageContent().toLowerCase().contains("m uncute")) {
+        
+        else if (cookString(event.getMessageContent().toLowerCase()).contains("m not cute") || event.getMessageContent().toLowerCase().contains("m uncute")) {
             event.getMessage().reply(":warning: ``Independent fact checkers have verified that this claim to uncuteness is false`` :warning:");
         }
 
@@ -42,6 +42,12 @@ public class Cutesy {
 
 
 
+    }
+
+    public static String cookString(String instring){
+        String outstring;
+        outstring = instring.replace('с','c').replace('е','e').replace('о','o').replace('ο','o').replace('օ','o').replace('ս','u').replace('υ','u');
+        return outstring;
     }
     
 }
