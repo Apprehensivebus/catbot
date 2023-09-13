@@ -13,70 +13,39 @@ public class SetupCommand {
 
     public static void setupCommand() {
 
-        String token = System.getenv("SECONDDISTOKEN");
-        DiscordApi api = new DiscordApiBuilder().setToken(token).addIntents(Intent.MESSAGE_CONTENT).login().join();
+        String token = System.getenv("THIRDDISTOKEN");
+        DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
 
 
-        SlashCommand.with("catgirlbot", "Command used to control catgirlbot",
+        SlashCommand.with("catgirlpolice", "Command used to control catgirlbot",
             Arrays.asList(
-                SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP, "permissions", "Manage catgirlbot's permissions",
+        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP, "bad", "Manage weird characters",
                     Arrays.asList(
-                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "toggle", "Allows a permission to a user for a channel",
-                            Arrays.asList(
-                                SlashCommandOption.create(SlashCommandOptionType.CHANNEL, "channel", "The channel for which to toggle the permission", true),
-                                SlashCommandOption.create(SlashCommandOptionType.LONG, "permission", "The permission to toggle", true
-        )))))))
-        .createGlobal(api)
-        .join();
-
-        SlashCommand.with("catgirlbotweirb", "Command used to control catgirlbot",
-            Arrays.asList(
-                SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP, "weirb", "Manage weird characters",
-                    Arrays.asList(
-                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "add", "Adds a weird character",
-                            Arrays.asList(
-                                SlashCommandOption.create(SlashCommandOptionType.STRING, "weirbchar", "The weird character used to evade filters", true),
-                                SlashCommandOption.create(SlashCommandOptionType.STRING, "normchar", "What normal character people use it as", true
-        )))))))
-        .createGlobal(api)
-        .join();
-
-        SlashCommand.with("catgirlbotweirb2", "Command used to control catgirlbot",
-            Arrays.asList(
-                SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP, "weirb", "Manage weird characters",
-                    Arrays.asList(
-                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "test", "Adds a weird character",
+                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "test", "Test a bad word filter",
                             Arrays.asList(
                                 SlashCommandOption.create(SlashCommandOptionType.STRING, "word", "The word to convert from weird to normal", true)
-        ))))))
-        .createGlobal(api)
-        .join();
-
-
-        SlashCommand.with("catgirlbotbad", "Command used to control catgirlbot",
-            Arrays.asList(
-                SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP, "bad", "Manage weird characters",
-                    Arrays.asList(
-                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "add", "Adds a weird character",
+        
+                        )),SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "add", "Adds a bad word",
                             Arrays.asList(
                                 SlashCommandOption.create(SlashCommandOptionType.STRING, "badword", "The weird character used to evade filters", true),
                                 SlashCommandOption.create(SlashCommandOptionType.STRING, "goodword", "What normal character people use it as", true
-        )))))))
-        .createGlobal(api)
-        .join();
-
-        SlashCommand.with("catgirlbotbad2", "Command used to control catgirlbot",
-            Arrays.asList(
-                SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP, "bad", "Manage weird characters",
+        )))))
+        
+        
+        ,SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND_GROUP, "filter", "Manage weird characters",
                     Arrays.asList(
-                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "test", "Adds a weird character",
+                        SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "test", "Test a weird character filter",
                             Arrays.asList(
                                 SlashCommandOption.create(SlashCommandOptionType.STRING, "word", "The word to convert from weird to normal", true)
-        ))))))
+        )),SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "add", "Adds a weird character",
+                            Arrays.asList(
+                                SlashCommandOption.create(SlashCommandOptionType.STRING, "weirbchar", "The weird character used to evade filters", true),
+                                SlashCommandOption.create(SlashCommandOptionType.STRING, "normchar", "What normal character people use it as", true
+        )))))
+        ))
         .createGlobal(api)
         .join();
 
-    
     }
     
 
