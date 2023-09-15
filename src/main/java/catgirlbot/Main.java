@@ -32,7 +32,7 @@ public class Main {
             try {
                 weirbs = GoobNames.getWeirbs(server);
                 bads = GoobNames.getBads(server);
-                if (!GoobNames.deBadify(GoobNames.deWeirbify(event.getNewNickname().get().toLowerCase(), weirbs), bads).equals(event.getNewNickname().get().toLowerCase())){
+                if (!GoobNames.deBadify(GoobNames.deWeirbify(event.getNewNickname().get().toLowerCase(), weirbs), bads).equals(GoobNames.deWeirbify(event.getNewNickname().get().toLowerCase(), weirbs))){
                     event.getUser().updateNickname(event.getServer(),GoobNames.deBadify(GoobNames.deWeirbify(event.getNewNickname().get().toLowerCase(), weirbs), bads));
                 }
 
