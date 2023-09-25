@@ -12,7 +12,7 @@ public class Headpats {
         "https://tenor.com/view/pat-gif-19389750",
         "https://tenor.com/view/anime-pat-gif-22001971",
         "https://tenor.com/view/pat-garrys-mod-garrys-mod-physics-fast-intense-gif-26322619",
-        "https://tenor.com/view/neko-pat-gif-25585701",
+        "https://tenor.com/view/qualidea-code-head-pat-anime-anime-girl-blush-anime-gif-24627864",
         "https://tenor.com/view/pat-gif-20637974"
     };
 

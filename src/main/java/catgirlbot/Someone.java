@@ -26,10 +26,10 @@ public class Someone {
 
     }
 
-
+    
     public static void addSomeone (MessageCreateEvent event) { // adds a quote duh
         String id = event.getMessageAuthor().getIdAsString(); 
-        
+
         try{ // so java no yell at me :'(
             event.getChannel().sendMessage("Added you to the @someone list :smile: "); //posting quote before saving
             FileOutputStream fos = new FileOutputStream(("someones/" + event.getServer().get().getIdAsString() + ".txt"), true); // get file named after the server
@@ -49,7 +49,12 @@ public class Someone {
             List<String> ids = Files.readAllLines(path); // just read the entire file
             Integer quoteNumb =(int) Math.round(Math.random()*(ids.size()-1)); // select random quote number between 0 and max index of ids
             String id=ids.get(quoteNumb);
-            event.getChannel().sendMessage("<@" + id + ">"); // send that quote!
+            if (id.equals(event.getMessageAuthor().getIdAsString())){
+                grabSomeone(event); // yippee recursion
+                System.out.println("had to recurse");
+            } else {
+                event.getChannel().sendMessage("<@" + id + ">"); // send that quote!
+            }
         } 
         
         catch (Exception e) {
@@ -64,7 +69,7 @@ public class Someone {
             Path path = Paths.get("someones/" + event.getServer().get().getIdAsString() + ".txt"); // get the file location for this thing
             List<String> ids = Files.readAllLines(path);// just read the entire file and grab line of choice
             for (int i = 0 ; i<ids.size(); i++ ){
-                System.out.println(ids.get(i) + "|" + event.getMessageAuthor().getIdAsString());
+                //System.out.println(ids.get(i) + "|" + event.getMessageAuthor().getIdAsString());
                 if (event.getMessageAuthor().getIdAsString().equals(ids.get(i))) {
                     ids.remove(ids.get(i)); // remove the marked for death person
                     event.getChannel().sendMessage("Okay, removed you from the list ");
