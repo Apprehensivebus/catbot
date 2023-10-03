@@ -165,38 +165,31 @@ public class Meow {
             }
         }
 
-        public static void loadMeow (DiscordApi api) {
-            try {
-                Path path = Paths.get("meows.txt"); // get the file location for this thing
-                List<String> ids = Files.readAllLines(path); // just read the entire file and grab line of choice
-                Files.delete(path);
-                for (int i = 0 ; i<ids.size(); i++ ){
-                    if (Long.parseLong(ids.get(i).split("/")[3]) > System.currentTimeMillis()){
-                        long delay = Long.parseLong(ids.get(i).split("/")[3]) - System.currentTimeMillis(); 
-                        TextChannel channel = api.getTextChannelById(ids.get(i).split("/")[1]).get();
-                        System.out.println(ids.get(i).split("/")[2]);
-                        Message message = api.getMessageById(ids.get(i).split("/")[2] , channel).join();
-                        saveMeow(api.getTextChannelById(ids.get(i).split("/")[1]).get(), delay, api.getMessageById(ids.get(i).split("/")[2] , api.getTextChannelById(ids.get(i).split("/")[1]).get()).get());  
-                        new Thread() {
-                            public void run() {
-                                try {
-                                    Meow.meow(channel , delay, message);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
+        public static void loadMeow (DiscordApi api) throws Exception{
+            Path path = Paths.get("meows.txt"); // get the file location for this thing
+            List<String> ids = Files.readAllLines(path); // just read the entire file and grab line of choice
+            Files.delete(path);
+            for (int i = 0 ; i<ids.size(); i++ ){
+                if (Long.parseLong(ids.get(i).split("/")[3]) > System.currentTimeMillis()){
+                    long delay = Long.parseLong(ids.get(i).split("/")[3]) - System.currentTimeMillis(); 
+                    TextChannel channel = api.getTextChannelById(ids.get(i).split("/")[1]).get();
+                    System.out.println(ids.get(i).split("/")[2]);
+                    Message message = api.getMessageById(ids.get(i).split("/")[2] , channel).join();
+                    saveMeow(api.getTextChannelById(ids.get(i).split("/")[1]).get(), delay, api.getMessageById(ids.get(i).split("/")[2] , api.getTextChannelById(ids.get(i).split("/")[1]).get()).get());  
+                    new Thread() {
+                        public void run() {
+                            try {
+                                Meow.meow(channel , delay, message);
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        }.start();
-                        System.out.println("Loaded a meow!");
-                    } else {
-                        System.out.println("Tried to load a meow, but it was expired");
-                    }
+                        }
+                    }.start();
+                    System.out.println("Loaded a meow!");
+                } else {
+                    System.out.println("Tried to load a meow, but it was expired");
                 }
-                System.out.println("Done loading meows!");
-            } 
-        
-            catch (Exception e) {
-                e.printStackTrace(); // coordinated yelling
             }
-
+            System.out.println("Done loading meows!");
         }
 }

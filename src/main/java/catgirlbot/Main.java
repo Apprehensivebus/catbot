@@ -2,8 +2,10 @@ package catgirlbot;
 
 
 
+import java.io.IOException;
 import java.util.BitSet;
 import java.util.HashMap;
+import java.util.List;
 
 import org.javacord.api.*;
 import org.javacord.api.entity.channel.ServerChannel;
@@ -19,6 +21,7 @@ import org.json.JSONObject;
 public class Main {
     static JSONObject perms;
     static HashMap<Long, BitSet> parsedPerms;
+    static List<String > weirbs;
 
     public static void main(String[] args) {
         String token = System.getenv("SECONDDISTOKEN");
@@ -26,7 +29,18 @@ public class Main {
         perms = Perms.loadPerms();
         parsedPerms = Perms.parsePerms(perms);
         Proxy.makeProxy(api);
-        Meow.loadMeow (api);
+
+        try {
+            Meow.loadMeow (api);
+        } catch (Exception e) {
+            System.out.println("Could not load meows");
+        }
+
+        try {
+            weirbs = GoobNames.getWeirbs();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         api.addSlashCommandCreateListener(event -> {
             SlashCommandInteraction slashCommandInteraction = event.getSlashCommandInteraction();
@@ -65,7 +79,8 @@ public class Main {
 
                 // begin random cutesy stuff blocck, perm value 4
                 if (parsedPerms.get(event.getChannel().getId()).get(2)){ 
-                    Cutesy.doCute(event);
+                    Cutesy.doCute(event, weirbs);
+                    Annoy.checkannoy(event);
                 }
                 
                 // begin anarchy chess, perm value 8

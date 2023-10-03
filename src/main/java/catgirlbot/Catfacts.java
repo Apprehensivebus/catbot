@@ -19,15 +19,15 @@ public class Catfacts {
             addFact(event, api);
         } 
 
-        else if (event.getMessageContent().toLowerCase().contains("catgirl, grab cat fact")) {
+        else if (event.getMessageContent().toLowerCase().contains("catgirl, grab cat")) {
             grabFact(event, api);
         } 
         
-        else if (event.getMessageContent().toLowerCase().contains("catgirl, random cat fact")) {
+        else if (event.getMessageContent().toLowerCase().contains("catgirl, random cat")) {
             randomFact(event, api);
         } 
 
-        else if (event.getMessageContent().toLowerCase().contains("catgirl, delete quote") && (event.getMessageAuthor().getIdAsString().equals("1138462287183749200") || event.getMessageAuthor().isBotOwner())) {
+        else if (event.getMessageContent().toLowerCase().contains("catgirl, delete cat") && (event.getMessageAuthor().getIdAsString().equals("1138462287183749200") || event.getMessageAuthor().isBotOwner())) {
             deleteFact(event, api);
         }
     }
