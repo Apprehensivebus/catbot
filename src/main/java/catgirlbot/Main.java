@@ -59,6 +59,10 @@ public class Main {
         });
 
         api.addMessageCreateListener(event -> {
+            if (event.getMessageAuthor().isServerAdmin() && event.getMessageContent().equals("!!react to this message to get full access")){
+                reaction.reactionroles(event.getMessage());
+            }
+
             if (event.getMessageAuthor().isRegularUser() && parsedPerms.containsKey(event.getChannel().getId())) {
 
                 // block for meow timer, perm value 1
