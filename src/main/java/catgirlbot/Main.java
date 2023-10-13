@@ -5,11 +5,8 @@ package catgirlbot;
 
 
 import java.io.FileOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
+
 
 import org.javacord.api.*;
 import org.javacord.api.entity.intent.Intent;
@@ -36,10 +33,11 @@ public class Main {
                 System.out.println(msgs.size());
                 var list = new ArrayList<Message>();
                 list.addAll(msgs);
-                list.removeIf(m -> m.getAuthor().getId()!=63359901975449600L);
+                list.removeIf(m -> m.getAuthor().getId()==543864705538719754L);
+                list.removeIf(m -> !m.getContent().toLowerCase().contains("hugg"));
                 System.out.println(list.size());
                 try {
-                    FileOutputStream fos = new FileOutputStream(("vin.txt"), false); // get file named after the server
+                    FileOutputStream fos = new FileOutputStream(("hugg.txt"), false); // get file named after the server
                 for (int k = 0 ; k<list.size() ; k++ ){ // rewrite the entire file without dead quote
                     fos.write((list.get(k).getContent() + "\r\n").getBytes()); //write channel & message ids
                 }
