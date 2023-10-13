@@ -44,11 +44,29 @@ public class Main {
 
         api.addSlashCommandCreateListener(event -> {
             SlashCommandInteraction slashCommandInteraction = event.getSlashCommandInteraction();
-            if (slashCommandInteraction.getFullCommandName().equals("catgirlbot permissions toggle")) {
+            if (slashCommandInteraction.getFullCommandName().equals("catgirlbot permissions edit")) {
                 if (slashCommandInteraction.getUser().isBotOwner() || slashCommandInteraction.getServer().get().hasPermission(slashCommandInteraction.getUser(), PermissionType.valueOf("MANAGE_CHANNELS"))) {
                     ServerChannel channel = slashCommandInteraction.getArgumentChannelValueByName("channel").get();
                     int permission = slashCommandInteraction.getArgumentLongValueByName("permission").get().intValue();
-                    slashCommandInteraction.createImmediateResponder().setContent("You tried to toggle permission " + permission + " in channel " + channel.getName()).setFlags(MessageFlag.EPHEMERAL).respond().join();
+                    slashCommandInteraction.createImmediateResponder().setContent("You tried to edit permission " + permission + " in channel " + channel.getName()).setFlags(MessageFlag.EPHEMERAL).respond().join();
+                    perms.put(String.valueOf(channel.getId()), permission);
+                    Perms.savePerms(perms);
+                    perms = Perms.loadPerms();
+                    parsedPerms = Perms.parsePerms(perms);
+                    System.out.println("Successfully changed perms!");
+                }
+            } else if (slashCommandInteraction.getFullCommandName().equals("catgirlbot permissions toggle")) {
+                if (slashCommandInteraction.getUser().isBotOwner() || slashCommandInteraction.getServer().get().hasPermission(slashCommandInteraction.getUser(), PermissionType.valueOf("MANAGE_CHANNELS"))) {
+                    ServerChannel channel = slashCommandInteraction.getArgumentChannelValueByName("channel").get();
+                    int permission;
+
+                    if (slashCommandInteraction.getArgumentBooleanValueByName("yesno").get()){
+                        permission = 239;
+                    } else {
+                        permission = 0;
+                    }
+
+                    slashCommandInteraction.createImmediateResponder().setContent("You tried to toggle permission in channel " + channel.getName()).setFlags(MessageFlag.EPHEMERAL).respond().join();
                     perms.put(String.valueOf(channel.getId()), permission);
                     Perms.savePerms(perms);
                     perms = Perms.loadPerms();
@@ -59,14 +77,10 @@ public class Main {
         });
 
         api.addMessageCreateListener(event -> {
-            if (event.getMessageAuthor().isServerAdmin() && event.getMessageContent().equals("!!react to this message to get full access")){
-                reaction.reactionroles(event.getMessage());
-            }
-
             if (event.getMessageAuthor().isRegularUser() && parsedPerms.containsKey(event.getChannel().getId())) {
 
                 // block for meow timer, perm value 1
-                if (parsedPerms.get(event.getChannel().getId()).get(0) && event.getMessageContent().substring(0, Math.min(event.getMessageContent().length(), 14)).equalsIgnoreCase("Meow at me in ")) {
+                if (parsedPerms.get(event.getChannel().getId()).get(0) && event.getMessageContent().replaceAll("catgirl, ", "").replaceAll("catgirl ", "").substring(0, Math.min(event.getMessageContent().length(), 14)).equalsIgnoreCase("Meow at me in ")) {
                     Meow.meowtimer(event);
                     return;
                 }
@@ -112,7 +126,7 @@ public class Main {
                     Someone.doSomeone(event);
                 }
 
-                if ((event.getMessage().getContent().equalsIgnoreCase("catgirl, explain the permissions command to me")) && (event.getMessageAuthor().isBotOwner() || event.getServer().get().hasPermission(event.getMessageAuthor().asUser().get(), PermissionType.valueOf("MANAGE_CHANNELS")))) {
+                if ((event.getMessage().getContent().equalsIgnoreCase("catgirl, explain the permissions edit command to me")) && (event.getMessageAuthor().isBotOwner() || event.getServer().get().hasPermission(event.getMessageAuthor().asUser().get(), PermissionType.valueOf("MANAGE_CHANNELS")))) {
                     event.getChannel().sendMessage("Okay okay so this is going to be needlessly complex because Sasha's lazy and should make a better system but: \n"
                     + "So first you use /catgirlbot permissions toggle, this will ask for the channel where you want to change her permissions, and a value.\n"
                     + "You get the value by adding up the following numbers for each feature you want enabled, or 0 for none: \n"

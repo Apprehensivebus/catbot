@@ -38,11 +38,7 @@ public class EightBall {
                 case 18: result = "Independent fact checkers say no"; break;
                 case 19: result = "My sources say no"; break;
                 case 20: result = "Prolly not"; break;
-
-
-
             }
-            
             event.getMessage().getChannel().sendMessage(":8ball: ``" + result + "`` :8ball:");
         }
 

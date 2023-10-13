@@ -10,7 +10,6 @@ public class Proxy {
     public static void doProxy (DiscordApi api) {
         Scanner term = new Scanner(System.in);
         while(true){
-            System.out.println("ready");
             String result = term.nextLine();  // Read user input
             if (result.startsWith("/")) {
                 channel=result.substring(1);

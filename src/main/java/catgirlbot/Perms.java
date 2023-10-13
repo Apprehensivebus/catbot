@@ -12,11 +12,7 @@ import org.json.JSONObject;
 import org.json.JSONWriter;
 
 public class Perms {
-    static Long homechannel = 1142829953562464267L; // temp solution until I add commands to add channels and file storage for persistence
-
     static final int bit_size = 8;
-
-    static BitSet homeperms = new BitSet(bit_size);
     static BitSet permSet = new BitSet();
 
     public static HashMap<Long, BitSet> parsePerms(JSONObject perms) {
@@ -38,7 +34,7 @@ public class Perms {
 
         JSONObject perms = new JSONObject(); // JSONObject with channel id as key and perms 
 
-        perms.put(String.valueOf(homechannel), 2); // woo bitset
+        perms.put(String.valueOf(1142469992617627713L), 0); // fallback
         return perms;
     }
 

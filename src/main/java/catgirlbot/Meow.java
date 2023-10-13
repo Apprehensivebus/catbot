@@ -40,14 +40,13 @@ public class Meow {
         private static long parseDelay(MessageCreateEvent event) {
             long delay = -1;
             double amt;
-            String[] timedelay = event.getMessageContent().replaceAll(",", "").substring(14).split(" ");
+            String[] timedelay = event.getMessageContent().toLowerCase().replaceAll("catgirl, ", "").replaceAll("catgirl ", "").replaceAll(",", "").substring(14).split(" ");
             if (timedelay[0].toLowerCase().contains("a") || timedelay[0].toLowerCase().contains("an")) {
                 amt = 1;
             } else {
                 amt = Double.parseDouble(timedelay[0]);
             }
 
-            System.out.println(timedelay.length);
             if (amt == 1){
                 if (timedelay.length>1) {
                     switch (timedelay[1].toLowerCase()) {

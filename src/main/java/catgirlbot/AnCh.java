@@ -24,7 +24,7 @@ public class AnCh {
         }
 
         else if (event.getMessageContent().toLowerCase().contains("went on vacation") && event.getMessageContent().toLowerCase().contains("never came back")) {
-            event.getMessage().getChannel().sendMessage("Catgirl storm incoming! :cat_blush:");
+            event.getMessage().getChannel().sendMessage("Catgirl storm incoming! <:cat_blush:1140222605304012800>");
         }
     }
 }
