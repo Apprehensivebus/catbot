@@ -79,13 +79,14 @@ public class Main {
         api.addMessageCreateListener(event -> {
             if (event.getMessageAuthor().isRegularUser() && parsedPerms.containsKey(event.getChannel().getId())) {
 
+ 
                 // block for meow timer, perm value 1
-                if (parsedPerms.get(event.getChannel().getId()).get(0) && event.getMessageContent().replaceAll("catgirl, ", "").replaceAll("catgirl ", "").substring(0, Math.min(event.getMessageContent().length(), 14)).equalsIgnoreCase("Meow at me in ")) {
+                if (parsedPerms.get(event.getChannel().getId()).get(0) && event.getMessageContent().toLowerCase().replaceAll("catgirl, ", "").replaceAll("catgirl ", "").substring(0, Math.min(event.getMessageContent().toLowerCase().replaceAll("catgirl, ", "").replaceAll("catgirl ", "").length(), 14)).equalsIgnoreCase("Meow at me in ")) {
                     Meow.meowtimer(event);
                     return;
                 }
                 // end of block for meow timer
-                
+
                 // begin general block for commands starting with catgirl,  perm value 2
                 if (event.getMessageContent().substring(0, Math.min(event.getMessageContent().length(), 9)).equalsIgnoreCase("catgirl, ")) {
                     if (parsedPerms.get(event.getChannel().getId()).get(1) && event.getMessageContent().substring(9).equalsIgnoreCase("treasure hunt")) {
