@@ -78,7 +78,6 @@ public class Main {
 
         api.addMessageCreateListener(event -> {
             if (event.getMessageAuthor().isRegularUser() && parsedPerms.containsKey(event.getChannel().getId())) {
-
  
                 // block for meow timer, perm value 1
                 if (parsedPerms.get(event.getChannel().getId()).get(0) && event.getMessageContent().toLowerCase().replaceAll("catgirl, ", "").replaceAll("catgirl ", "").substring(0, Math.min(event.getMessageContent().toLowerCase().replaceAll("catgirl, ", "").replaceAll("catgirl ", "").length(), 14)).equalsIgnoreCase("Meow at me in ")) {
@@ -120,6 +119,10 @@ public class Main {
                 // perm value 64 for magic 8 ball
                 if (parsedPerms.get(event.getChannel().getId()).get(6)) {
                     EightBall.doBall(event);
+                }
+
+                if (event.getMessageContent().contains("<@1142467907813658714>")){
+                    event.getMessage().addReaction("👀");
                 }
 
                 // perm value 128 for someone ping 
