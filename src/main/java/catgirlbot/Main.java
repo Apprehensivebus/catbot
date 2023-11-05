@@ -27,19 +27,19 @@ public class Main {
 
 
         api.addMessageCreateListener(event -> {
-            if (event.getMessageAuthor().isBotOwner() && event.getMessageContent().equals("Catgorl, start project Céleste.")) {
+            if (event.getMessageAuthor().isBotOwner() && event.getMessageContent().equals("Catgorl, start project mewo.")) {
                 System.out.println("oh lawd");
-                msgs = event.getChannel().getMessages(300000).join();
+                msgs = event.getChannel().getMessages(400000).join();
                 System.out.println(msgs.size());
                 var list = new ArrayList<Message>();
                 list.addAll(msgs);
-                list.removeIf(m -> m.getAuthor().getId()==543864705538719754L);
-                list.removeIf(m -> !m.getContent().toLowerCase().contains("hugg"));
+                //list.removeIf(m -> m.getAuthor().getId()==543864705538719754L);
+                //list.removeIf(m -> !m.getContent().toLowerCase().contains("hugg"));
                 System.out.println(list.size());
                 try {
-                    FileOutputStream fos = new FileOutputStream(("hugg.txt"), false); // get file named after the server
+                    FileOutputStream fos = new FileOutputStream(("times.txt"), false); // get file named after the server
                 for (int k = 0 ; k<list.size() ; k++ ){ // rewrite the entire file without dead quote
-                    fos.write((list.get(k).getContent() + "\r\n").getBytes()); //write channel & message ids
+                    fos.write((list.get(k).getCreationTimestamp().toEpochMilli() + "\r\n").getBytes()); //write channel & message ids
                 }
 
                 fos.close();
